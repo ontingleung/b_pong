@@ -1,6 +1,6 @@
 mod player_one;
 mod player_two;
-pub mod ball;
+mod ball;
 
 use bevy::prelude::*;
 

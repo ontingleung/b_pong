@@ -1,4 +1,4 @@
-mod components;
+pub mod components;
 mod systems;
 
 use bevy::prelude::*;
@@ -10,6 +10,7 @@ impl Plugin for BallPlugin {
         app
             .add_startup_system(spawn_ball)
             .add_system(ball_movement)
+            .add_system(update_ball_direction)
             .add_system(confine_ball_movement);
     }
 }

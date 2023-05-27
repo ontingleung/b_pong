@@ -9,7 +9,8 @@ pub struct PlayerOnePlugin;
 impl Plugin for PlayerOnePlugin {
     fn build(&self, app: &mut App) {
         app
-            .add_startup_system(spawn_player_one);
+            .add_startup_system(spawn_player_one)
+            .add_system(player_one_movement);
     }
 }
 

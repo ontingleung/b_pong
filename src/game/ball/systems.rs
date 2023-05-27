@@ -4,7 +4,7 @@ use bevy::window::PrimaryWindow;
 use rand::prelude::*;
 
 pub const BALL_SIZE: f32 = 64.0;
-pub const BALL_SPEED: f32 = 250.0;
+pub const BALL_SPEED: f32 = 650.0;
 
 pub fn spawn_ball(
     mut commands: Commands,
@@ -67,3 +67,29 @@ pub fn confine_ball_movement(
         transform.translation = translation;
     }
 }
+
+pub fn update_ball_direction(
+    mut ball_query: Query<(&Transform, &mut Ball)>,
+    window_query: Query<&Window, With<PrimaryWindow>>,
+) {
+    let window = window_query.get_single().unwrap();
+
+    let half_ball_size = BALL_SIZE / 2.0;
+    let x_min = 0.0 + half_ball_size;
+    let x_max = window.width() - half_ball_size;
+    let y_min = 0.0 + half_ball_size;
+    let y_max = window.height() - half_ball_size;
+
+    for (ball_transform, mut ball) in ball_query.iter_mut() {
+
+        let translation = ball_transform.translation;
+        if translation.x < x_min || translation.x > x_max {
+            ball.direction.x *= -1.0;
+        }
+        if translation.y < y_min || translation.y > y_max {
+            ball.direction.y *= -1.0;
+        }
+    }
+}
+    
+
