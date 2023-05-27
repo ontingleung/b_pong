@@ -1,5 +1,6 @@
 use bevy::prelude::*;
 
-
 #[derive(Component)]
-pub struct PlayerOne {}
+pub struct Ball {
+    pub direction: Vec2,
+}
